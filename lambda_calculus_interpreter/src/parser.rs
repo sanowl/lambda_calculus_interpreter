@@ -24,7 +24,7 @@ fn parse_variable(input: &str) -> IResult<&str, Term, VerboseError<&str>> {
 /// Parses an abstraction with multiple parameters (e.g., λx y. x y).
 fn parse_abstraction(input: &str) -> IResult<&str, Term, VerboseError<&str>> {
     let (input, _) = alt((tag("λ"), tag("\\")))(input)?;
-    let (input, params) = many1(preceded(multispace0, take_while1(|c: char| c.is_alphanumeric() || c == '_'))))(input)?;
+    let (input, params) = many1(preceded(multispace0, take_while1(|c: char| c.is_alphanumeric() || c == '_')))(input)?;
     let (input, _) = preceded(multispace0, char('.'))(input)?;
     let (input, body) = preceded(multispace0, parse_term)(input)?;
 
